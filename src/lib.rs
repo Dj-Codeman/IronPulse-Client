@@ -180,11 +180,10 @@ pub fn check(channel: &str) -> Option<String> {
 }
 
 #[allow(unused)]
-pub fn acknoledged() -> bool {
-    // unnessacery
+pub fn acknoledged(hex_encoded_messge: String) -> bool {
     // Sending
     // ! Creating the command
-    let request: Commands = Commands::Store("none".to_string());
+    let request: Commands = Commands::Ack(hex_encoded_messge);
     let registration_id: RegistrationId = RegistrationId::Id(create_hash(&PROG.to_string()));
     let integrity_data: Integrity =
         Integrity::Hash(create_hash(&format!("{}{}", registration_id, request)));
@@ -206,7 +205,6 @@ pub fn acknoledged() -> bool {
     exit_status(response_code, 200)
 }
 
-#[allow(unused)]
 pub fn make_payload(payload_type_raw: Types, payload_data_raw: String) -> Payload {
     let payload_type: Types = payload_type_raw;
     let payload_data: String = hex::encode(payload_data_raw);
@@ -217,7 +215,6 @@ pub fn make_payload(payload_type_raw: Types, payload_data_raw: String) -> Payloa
     }
 }
 
-#[allow(unused)]
 pub fn phrase_response(data: String) -> String {
     match hex::decode(&data) {
         Ok(data) => {

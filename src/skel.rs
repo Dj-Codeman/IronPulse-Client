@@ -46,7 +46,7 @@ pub enum Commands {
     DeleteChannel(String),   // Deletes a channel and permissions
     Store(String),           // Given the associated id stores a messege in a channel
     Check(String),           // Given ID retrives stored data in json format
-    // Ack,                     // Allows data to be deleted
+    Ack(String),             // Allows data to be deleted
 }
 
 pub enum Payload {
@@ -155,7 +155,7 @@ impl fmt::Display for Commands {
             Commands::DeleteChannel(data) => write!(f, "DeleteChannel/{}", data),
             Commands::Store(data) => write!(f, "Store/{}", data),
             Commands::Check(data) => write!(f, "Check/{}", data),
-            // Commands::Ack => write!(f, "Ack"),
+            Commands::Ack(data) => write!(f, "Ack/{}", data),
         }
     }
 }
